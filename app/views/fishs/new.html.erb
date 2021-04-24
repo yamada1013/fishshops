@@ -1,0 +1,24 @@
+<h1>Fishs#new</h1>
+<p>Find me in app/views/fishs/new.html.erb</p>
+
+
+<% if @fish.errors.any? %>
+  <h2><%= pluralize(@fish.errors.count, "error") %> prohibited </h2>
+  <% @fish.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+<% end %>
+
+
+<%= form_for @fish ,url: {action: 'create'}  do |f| %>
+  <%= f.label :fishname %>
+  <%= f.text_field :fishname %>
+
+  <%= f.label :body %>
+  <%= f.text_area :body %>
+
+  <%= f.label :image %>
+  <%= f.attachment_field :image %>
+
+  <%= f.submit  %>
+<% end %>

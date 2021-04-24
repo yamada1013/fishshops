@@ -1,0 +1,16 @@
+
+<% @fishs.each do |fish|%>
+
+  <%= link_to fish_path(fish) do %>
+    <%= attachment_image_tag fish, :image, fallback: "no-image.png" %>
+  <% end%>
+
+  <%= link_to fish_path(fish) do %>
+    <%= fish.fishname %>
+ <% end%>
+
+ <%= link_to seller_path(fish.seller.id) do %>
+   <h1>販売者<%= fish.seller.sellername %>さん</h1>
+<% end%>
+
+<% end%>

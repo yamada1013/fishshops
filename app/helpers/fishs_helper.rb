@@ -1,0 +1,2 @@
+module FishsHelper
+end

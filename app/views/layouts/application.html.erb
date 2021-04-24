@@ -11,6 +11,27 @@
   </head>
 
   <body>
+    <% if flash[:notice]%>
+      <p class="notice"><%= notice %></p>
+    <% end %>
+    <% if flash[:alert]%>
+      <p class="alert"><%= alert %></p>
+    <% end %>
+    <% if seller_signed_in? %>
+      <div>?????</div>
+      <%= link_to "ログアウト", destroy_seller_session_path , method: :delete %>
+      <%= link_to "アカウント削除", seller_registration_path , method: :delete ,data:{confirm:"本当にいいですか?"} %>
+      <%= link_to "売人一覧", sellers_path %>
+      <%= link_to "魚一覧", fishs_path %>
+      <%= link_to "魚追加", new_fish_path %>
+      <%= link_to "マイページ", seller_path(current_seller.id) %>
+    <% else %>
+      <div>?????</div>
+      <%= link_to "新規登録", new_seller_registration_path %>
+      <%= link_to "ログイン", seller_session_path %>
+      <%= link_to "売人一覧", sellers_path %>
+      <%= link_to "魚一覧", fishs_path %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

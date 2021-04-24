@@ -1,0 +1,32 @@
+<h1>Sellers#edit</h1>
+<p>Find me in app/views/sellers/edit.html.erb</p>
+
+<% if @seller.errors.any? %>
+  <h2><%= pluralize(@seller.errors.count, "error") %> prohibited </h2>
+  <% @seller.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+<% end %>
+
+
+      <%= form_for @seller do |f| %>
+        <%= f.label :sellername %>
+        <%= f.text_field :sellername %>
+
+        <%= f.label :profile_image %>
+        <%= f.attachment_field :profile_image %>
+
+        <%= f.label :profile %>
+        <%= f.text_area :profile %>
+
+        <%= f.label :email %>
+        <%= f.email_field :email %>
+
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation %>
+
+        <%= f.submit "Save changes", class: "btn btn-primary" %>
+      <% end %>
