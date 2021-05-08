@@ -1,0 +1,6 @@
+<h1>バイヤーの詳細ページ</h1>
+<% if @buyer.id  == current_buyer.id %>
+<h1><%= @buyer.buyername %>さん</h1>
+  <%= @buyer.email %>
+  <%= link_to "バイヤーアカウント編集" , edit_buyer_path(@buyer) %>
+<% end %>
