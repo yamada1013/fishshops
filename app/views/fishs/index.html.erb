@@ -7,10 +7,18 @@
 
   <%= link_to fish_path(fish) do %>
     <%= fish.fishname %>
- <% end%>
+  <% end%>
 
- <%= link_to seller_path(fish.seller.id) do %>
+  <%= link_to seller_path(fish.seller.id) do %>
    <h1>販売者<%= fish.seller.sellername %>さん</h1>
-<% end%>
+  <% end%>
+
+  <% if current_buyer.already_buyerfished?(fish) %>
+    <%= link_to "いいねをはずす", fish_buyerfishs_path(fish) , method:  :delete %>
+  <% else %>
+    <%= link_to "いいねをする" , fish_buyerfishs_path(fish) , method: :post %>
+  <% end %>
+
+  <%= fish.buyerfishs.count %>
 
 <% end%>
