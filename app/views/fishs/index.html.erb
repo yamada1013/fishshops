@@ -14,9 +14,13 @@
   <% end%>
 
   <% if current_buyer.already_buyerfished?(fish) %>
-    <%= link_to "いいねをはずす", fish_buyerfishs_path(fish) , method:  :delete %>
+    <%= link_to  fish_buyerfishs_path(fish) , method:  :delete do %>
+     <i class="fas fa-heart"></i>
+    <% end %>
   <% else %>
-    <%= link_to "いいねをする" , fish_buyerfishs_path(fish) , method: :post %>
+    <%= link_to fish_buyerfishs_path(fish) , method: :post do %>
+     <i class="far fa-heart"></i>
+    <% end %>
   <% end %>
 
   <%= fish.buyerfishs.count %>

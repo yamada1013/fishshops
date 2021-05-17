@@ -1,5 +1,5 @@
 class FishsController < ApplicationController
-  before_action :authenticate_seller!, except: [:index]
+  before_action :authenticate_seller!, except: [:index, :show ]
 
   def index
     @fishs = Fish.all
