@@ -8,6 +8,7 @@
  <h1>作成日<%= @fish.created_at.to_s(:datetime_jp) %></h1>
  <h1>更新日<%= @fish.updated_at.to_s(:datetime_jp) %></h1>
 
+<% if buyer_signed_in? %>
  <% if current_buyer.already_buyerfished?(@fish) %>
    <%= link_to  fish_buyerfishs_path(@fish) , method:  :delete do %>
     <i class="fas fa-heart"></i>
@@ -16,6 +17,7 @@
    <%= link_to fish_buyerfishs_path(@fish) , method: :post do %>
     <i class="far fa-heart"></i>
    <% end %>
+ <% end %>
  <% end %>
 
   <%= @fish.buyerfishs.count %>

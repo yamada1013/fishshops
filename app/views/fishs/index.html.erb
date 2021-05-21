@@ -13,10 +13,11 @@
    <h1>販売者<%= fish.seller.sellername %>さん</h1>
   <% end%>
 
-<% if fish.seller_id != current_seller %>
+<%#<% if fish.seller_id != current_seller %>
 
-  <% if current_buyer.already_buyerfished?(fish) %>
-    <%= link_to  fish_buyerfishs_path(fish) , method:  :delete do %>
+ <% if buyer_signed_in? %>
+    <% if current_buyer.already_buyerfished?(fish) %>
+      <%= link_to  fish_buyerfishs_path(fish) , method:  :delete do %>
      <i class="fas fa-heart"></i>
     <% end %>
   <% else %>
@@ -24,12 +25,12 @@
      <i class="far fa-heart"></i>
     <% end %>
 
-  <%#<% else %>
-
-  <% end %>
+<%#<% else %>
 
 <% end %>
 
+<%#<% end %>
+ <% end %>
 
   <%= fish.buyerfishs.count %>
 
