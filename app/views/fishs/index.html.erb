@@ -19,10 +19,13 @@
     <% if current_buyer.already_buyerfished?(fish) %>
       <%= link_to  fish_buyerfishs_path(fish) , method:  :delete do %>
      <i class="fas fa-heart"></i>
+     <%= fish.buyerfishs.count %>
     <% end %>
   <% else %>
     <%= link_to fish_buyerfishs_path(fish) , method: :post do %>
      <i class="far fa-heart"></i>
+     <%= fish.buyerfishs.count %>
+
     <% end %>
 
 <%#<% else %>
@@ -32,6 +35,5 @@
 <%#<% end %>
  <% end %>
 
-  <%= fish.buyerfishs.count %>
 
 <% end%>
