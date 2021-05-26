@@ -19,6 +19,8 @@
       <p class="alert"><%= alert %></p>
     <% end %>
 
+
+
     <% if seller_signed_in? %>
       <div>?????</div>
       <%= link_to "セラーログアウト", destroy_seller_session_path , method: :delete %>
@@ -29,23 +31,131 @@
       <%= link_to "魚追加", new_fish_path %>
       <%= link_to "マイページ", seller_path(current_seller.id) %>
 
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">ホーム</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <%= link_to  destroy_seller_session_path ,class: "nav-link", method: :delete do %>
+              セラーログアウト
+              <% end %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to seller_registration_path ,class: "nav-link" , method: :delete ,data:{confirm:"本当にいいですか?"} do %>
+              セラーアカウント削除
+              <% end %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to sellers_path, class: "nav-link" do %>
+                 売人一覧
+              <% end %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to fishs_path, class: "nav-link" do %>
+                魚一覧
+              <% end %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to new_fish_path , class: "nav-link" do %>
+                魚追加
+              <% end %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to seller_path(current_seller.id) , class: "nav-link" do %>
+                マイページ
+              <% end %>
+            </li>
+           </ul>
+          </div>
+        </nav>
+
+
     <% elsif buyer_signed_in? %>
-      <%= link_to "バイヤーログアウト", destroy_buyer_session_path , method: :delete %>
-      <%= link_to "バイヤーアカウント削除", buyer_registration_path , method: :delete ,data:{confirm:"本当にいいですか?"} %>
-      <%= link_to "売人一覧", sellers_path %>
-      <%= link_to "魚一覧", fishs_path %>
-      <%= link_to "バイヤーマイページ", buyer_path(current_buyer.id) %>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="#">ホーム</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <%= link_to  destroy_buyer_session_path ,class: "nav-link", method: :delete  do %>
+                バイヤーログアウト
+                <% end %>
+              </li>
+              <li class="nav-item active">
+                <%= link_to buyer_registration_path , class: "nav-link", method: :delete ,data:{confirm:"本当にいいですか?"} do %>
+                バイヤーアカウント削除
+                <% end %>
+              </li>
+              <li class="nav-item active">
+                <%= link_to sellers_path, class: "nav-link" do %>
+                売人一覧
+                <% end %>
+              </li>
+              <li class="nav-item active">
+                <%= link_to fishs_path, class: "nav-link" do %>
+                 魚一覧
+                <% end %>
+              </li>
+              <li class="nav-item active">
+                <%= link_to buyer_path(current_buyer.id) , class: "nav-link" do %>
+                   バイヤーマイページ
+                <% end %>
+              </li>
+              </ul>
+            </div>
+          </nav>
+
     <% else %>
-      <div>?????</div>
-      <%= link_to "セラー新規登録", new_seller_registration_path %>
-      <%= link_to "セラーログイン", seller_session_path %>
 
-      <%= link_to "バイヤー新規登録", new_buyer_registration_path %>
-      <%= link_to "バイヤーログイン", buyer_session_path %>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">ホーム</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <%= link_to  new_seller_registration_path, class: "nav-link" do %>
+              セラー新規登録
+              <% end %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to seller_session_path, class: "nav-link" do %>
+              セラーログイン
+              <% end %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to new_buyer_registration_path, class: "nav-link" do %>
+              バイヤー新規登録
+              <% end %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to buyer_session_path, class: "nav-link" do %>
+               バイヤーログイン
+              <% end %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to sellers_path, class: "nav-link" do %>
+                 売人一覧
+              <% end %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to fishs_path, class: "nav-link" do %>
+                魚一覧
+              <% end %>
+            </li>
+            </ul>
+          </div>
+        </nav>
 
-      <%= link_to "売人一覧", sellers_path %>
-      <%= link_to "魚一覧", fishs_path %>
     <% end %>
 
 
