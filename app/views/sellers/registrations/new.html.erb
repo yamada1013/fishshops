@@ -1,34 +1,41 @@
+<div class="container-login">
+
 <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "sellers/shared/error_messages", resource: resource %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :sellername %>(viewsのsellersフォルダを参照にできてる)<br />
-    <%= f.text_field :sellername, autofocus: true, autocomplete: "sellername" %>
+    <%= f.text_field :sellername, autofocus: true, autocomplete: "sellername",class: 'form-control',required: true,maxlength: '100' %>
   </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email",class: 'form-control',required: true,maxlength: '100' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :password %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <%# <em>(<%= @minimum_password_length %> <%#characters minimum)</em> %>
+    <%# コメントアウト　%>
+    <small class="form-text text-muted"><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></small>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password",class: 'form-control', required: true,maxlength: '30' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password",class: 'form-control', required: true,minlength: @minimum_password_length,
+    maxlength: '30' %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="form-group">
+      <%= f.submit('.sign_up'), class: 'btn btn-primary btn-block' %>
   </div>
 <% end %>
 
 <%= render "sellers/shared/links" %>
+
+</div>
