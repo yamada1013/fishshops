@@ -14,5 +14,10 @@
  *= require_self
  */
 @import "bootstrap/scss/bootstrap";
-
  //@import "bulma";      bulma-railsがcssのフレームワークだからbootstrapと一緒にしてはいけない
+
+ .container-login{
+   @extend .container-fluid;
+   max-width: 576px;
+   padding: 2em;
+ }
