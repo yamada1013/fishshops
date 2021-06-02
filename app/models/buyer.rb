@@ -7,6 +7,8 @@ class Buyer < ApplicationRecord
     self.buyerfishs.exists?(fish_id: fish.id)
   end
 
+  #buyerもバリデーションをかける(最後の調整で)
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 end

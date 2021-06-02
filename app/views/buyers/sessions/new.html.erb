@@ -1,12 +1,6 @@
-<h2>Log in</h2>
+<h2><%= t('.sign_in') %></h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
-<div class="field">
-  <%= f.label :buyerrname %>(viewsのbuyersフォルダを参照にできてる)<br />
-  <%= f.text_field :buyername, autofocus: true, autocomplete: "buyerrname" %>
-</div>
-
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
@@ -24,8 +18,8 @@
     </div>
   <% end %>
 
-  <div class="form-group"> <%#<div class="field">から変更bootstrapが反映できるからの確認%>
-    <%= f.submit "Log in", class:'btn btn-primary' %><%#class:'btn btn-primary' を追加した%>
+  <div class="actions">
+    <%= f.submit t('.sign_in') %>
   </div>
 <% end %>
 
