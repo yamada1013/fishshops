@@ -1,22 +1,21 @@
-<h1>Sellers#index</h1>
-<p>Find me in app/views/sellers/index.html.erb</p>
 <div class="container mt-1">
 <div class="row">
 <% @sellers.each do |seller| %>
 
 <div class="col-md-2">
-  <div class="card">
 
-<%= link_to seller_path(seller) do %>
+<div class="card">
+ <%= link_to seller_path(seller) do %>
   <%= attachment_image_tag seller, :profile_image , fallback: "no-image.png", class:'img-fluid' %>
-<% end%>
+ <% end%>
 </div>
+
 <div class="col-md-2">
   <%=  link_to seller_path(seller) do %>
     <%= seller.sellername %>
   <% end %>
-  
-  </div>
+ </div>
+
  </div>
 <% end %>
 </div>

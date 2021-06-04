@@ -1,12 +1,20 @@
+
+
 <h1>Fishs#show</h1>
 <p>Find me in app/views/fishs/show.html.erb</p>
 
 
+
  <%= @fish.fishname%>
+
+
+
  <%= attachment_image_tag @fish, :image %>
  <%= @fish.body %>
  <h1>作成日<%= @fish.created_at.to_s(:datetime_jp) %></h1>
  <h1>更新日<%= @fish.updated_at.to_s(:datetime_jp) %></h1>
+
+
 
  <% if buyer_signed_in? %>
 
@@ -27,7 +35,11 @@
    <%= link_to "編集", edit_fish_path(@fish) %>
    <%= link_to "削除", fish_path(@fish) , method: :delete, data:{confirm:"削除いいですか?"} %>
   <% end %>
+
+
+
   <%= @fish.buyerfishs.count %>
+
 
 
  <% end %>
