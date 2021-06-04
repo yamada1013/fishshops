@@ -1,6 +1,25 @@
-<h1>バイヤーの詳細ページ</h1>
+<div class="container mt-1">
+<div class="row">
+
 <% if @buyer.id  == current_buyer.id %>
-<h1><%= @buyer.buyername %>さん</h1>
-  <%= @buyer.email %>
-  <%= link_to "バイヤーアカウント編集" , edit_buyer_path(@buyer) %>
+<div class="col-md-6">
+  <h6>名前　<%= @buyer.buyername %>さん</h6>
+</div>
+<div class="col-md-6">
+  <h6><%= @buyer.email %></h6>
+</div>
+<div class="col-md-12">
+  <h6><%= link_to "バイヤーアカウント編集" , edit_buyer_path(@buyer) %></h6>
+</div>
+
+
+<div class="col-md-6">
+ <h6><%= @buyer.buyername %>さんが いいねした商品一覧</h6>
+</div>
+<div class="col-md-6">
+ <h6><%= @buyer.buyername %>さんが 購入した商品一覧</h6>
+</div>
 <% end %>
+
+</div>
+</div>
