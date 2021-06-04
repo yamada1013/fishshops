@@ -1,6 +1,4 @@
-<h1>Fishs#new</h1>
-<p>Find me in app/views/fishs/new.html.erb</p>
-
+<div class="container-login">
 
 <% if @fish.errors.any? %>
   <h2><%= pluralize(@fish.errors.count, "error") %> prohibited </h2>
@@ -9,16 +7,24 @@
     <% end %>
 <% end %>
 
-
+<div class="form-group">
 <%= form_for @fish ,url: {action: 'create'}  do |f| %>
-  <%= f.label :fishname %>
-  <%= f.text_field :fishname %>
+  <%= f.label :魚種名 %>
+  <%= f.text_field :fishname, autofocus: true, autocomplete: "fishname",class: 'form-control',required: true,maxlength: '100' %>
+  </div>
 
-  <%= f.label :body %>
-  <%= f.text_area :body %>
+<div class="form-group">
+  <%= f.label :詳細情報 %>
+  <%= f.text_area :body, autofocus: true, autocomplete: "fishname",class: 'form-control',required: true,maxlength: '100'  %>
+</div>
 
-  <%= f.label :image %>
-  <%= f.attachment_field :image %>
+<div class="form-group">
+  <%= f.label :画像 %>
+  <%= f.attachment_field :image, autofocus: true, autocomplete: "fishname",class: 'form-control',required: true,maxlength: '100'  %>
+</div>
 
-  <%= f.submit  %>
+<div class="form-group">
+  <%= f.submit value="投稿する", class: 'btn btn-primary btn-block' %>
+</div>
 <% end %>
+</div>
