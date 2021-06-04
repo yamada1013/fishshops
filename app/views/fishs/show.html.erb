@@ -1,45 +1,47 @@
+<div class="container mt-1">
+<div class="row">
 
-
-<h1>Fishs#show</h1>
-<p>Find me in app/views/fishs/show.html.erb</p>
-
-
-
- <%= @fish.fishname%>
-
-
-
- <%= attachment_image_tag @fish, :image %>
- <%= @fish.body %>
- <h1>作成日<%= @fish.created_at.to_s(:datetime_jp) %></h1>
- <h1>更新日<%= @fish.updated_at.to_s(:datetime_jp) %></h1>
-
+<div class="col-md-12">
+  <%= attachment_image_tag @fish, :image %>
+  <h6>商品名　　<%= @fish.fishname%></h6>
+</div>
+<div class="col-md-12">
+  <h6>商品詳細　<%= @fish.body %></h6>
+</div>
+<div class="col-md-6">
+  <h6>作成日  <%= @fish.created_at.to_s(:datetime_jp) %></h6>
+  <h6>更新日<%= @fish.updated_at.to_s(:datetime_jp) %></h6>
+</div>
 
 
  <% if buyer_signed_in? %>
 
+ <div class="col-md-12">
   <% if current_buyer.already_buyerfished?(@fish) %>
    <%= link_to  fish_buyerfishs_path(@fish) , method:  :delete do %>
     <i class="fas fa-heart"></i>
    <% end %>
- <%= @fish.buyerfishs.count %>
+ <h6>いいね数  <%= @fish.buyerfishs.count %></h6>
   <% else %>
    <%= link_to fish_buyerfishs_path(@fish) , method: :post do %>
     <i class="far fa-heart"></i>
    <% end %>
-   <%= @fish.buyerfishs.count %>
+   <h6>いいね数  <%= @fish.buyerfishs.count %></h6>
   <% end %>
+  </div>
 
  <% elsif seller_signed_in?  %>
   <% if @fish.seller_id == current_seller.id %>
+  <div class="col-md-6">
    <%= link_to "編集", edit_fish_path(@fish) %>
    <%= link_to "削除", fish_path(@fish) , method: :delete, data:{confirm:"削除いいですか?"} %>
+   </div>
+  <% end %>
+ <div class="col-md-12">
+  <h6>いいね数  <%= @fish.buyerfishs.count %></h6>
+  </div>
+
   <% end %>
 
-
-
-  <%= @fish.buyerfishs.count %>
-
-
-
- <% end %>
+  </div>
+  </div>
