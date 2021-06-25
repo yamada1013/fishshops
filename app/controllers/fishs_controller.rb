@@ -2,7 +2,8 @@ class FishsController < ApplicationController
   before_action :authenticate_seller!, except: [:index, :show ]
 
   def index
-    @fishs = Fish.all
+   @q = Fish.ransack(params[:q])
+   @fishs = @q.result(distinct: true)
   end
 
   def show

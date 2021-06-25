@@ -1,5 +1,27 @@
 <div class="container mt-1">
+  <%= search_form_for @q ,url: fishs_path do |f| %>
   <div class="row">
+    <div class="col-2">
+      <div class="form-group">
+        <%= f.label :fishname, "魚名" %>
+        <%= f.search_field :fishname_cont, autofocus: true, autocomplete: "fishname",class: 'form-control',maxlength: '100'  %>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <%= f.label :body, "詳細" %>
+        <%= f.search_field :body_cont, autofocus: true, autocomplete: "body",class: 'form-control',maxlength: '100'  %>
+      </div>
+    </div>
+    <div class="col-2 align-self-end">
+      <div class="form-group">
+        <%= f.submit "検索する", class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="row mt-2">
 
     <% @fishs.each do |fish|%>
       <div class="col-md-2">
@@ -42,5 +64,5 @@
 
     <% end %>
 
-  </div>
+
 </div>
