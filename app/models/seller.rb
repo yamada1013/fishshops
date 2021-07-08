@@ -9,6 +9,8 @@ class Seller < ApplicationRecord
    attachment :profile_image
    has_many :fishs , dependent: :destroy
 
+   has_many :answers, dependent: :destroy
+
    with_options presence: true do
      validates :sellername
      validates :email

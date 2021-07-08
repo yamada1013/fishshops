@@ -19,6 +19,15 @@
 <div class="col-md-6">
  <h6><%= @buyer.buyername %>さんが 購入した商品一覧</h6>
 </div>
+
+<div class="col-md-12">
+ <% @buyer.questions.each do |question| %>
+  <div>
+   <%= question.body %>
+  </div>
+ <% end %>
+ </div>
+
 <% end %>
 
 </div>

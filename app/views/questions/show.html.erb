@@ -1,0 +1,19 @@
+
+<p>質問投稿表示<%= @question.body %></p>
+
+<div>
+  <%= form_with(model: [@question, @answer], local: true) do |f| %>
+    <div>
+      <%= f.label :body, "回答フォーム表示" %><br>
+      <%= f.text_area :body %>
+    </div>
+    <%= f.submit "投稿する" %>
+  <% end %>
+</div>
+
+<p>回答投稿表示<%= @question.body %></p>
+<div>
+  <% @question.answers.each do |answer| %>
+    <p><%= answer.body %></p>
+  <% end %>
+</div>

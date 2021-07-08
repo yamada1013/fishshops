@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://kit.fontawesome.com/484e6509e8.js" crossorigin="anonymous"></script>
@@ -61,6 +61,11 @@
                 マイページ
               <% end %>
             </li>
+            <li class="nav-item active">
+              <%= link_to question_path , class: "nav-link" do %>
+                 [回答]フォーム(questions/show.html.erb)
+              <% end %>
+            </li>
            </ul>
           </div>
         </nav>
@@ -98,6 +103,11 @@
               <li class="nav-item active">
                 <%= link_to buyer_path(current_buyer.id) , class: "nav-link" do %>
                    バイヤーマイページ
+                <% end %>
+              </li>
+              <li class="nav-item active">
+                <%= link_to new_question_path , class: "nav-link" do %>
+                   質問フォーム(questions/new.html.erb)
                 <% end %>
               </li>
               </ul>

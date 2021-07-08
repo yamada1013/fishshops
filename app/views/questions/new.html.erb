@@ -1,0 +1,7 @@
+<%= form_with(model: @question, local: true) do |f| %>
+  <div>
+    <p>質問フォーム表示</p>
+    <%= f.text_area :body %>
+  </div>
+  <%= f.submit %>
+<% end %>

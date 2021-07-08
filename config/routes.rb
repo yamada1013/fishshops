@@ -12,4 +12,12 @@ Rails.application.routes.draw do
   end
   resources :buyers
 
+
+  resources :questions do
+    resources :answers, only: [:create]
+  end
+  #get "/questions/new", to: "questions#new"
+  #post "/questions", to: "questions#create"
+  #get "/questions/:id", to: "questions#show"
+
 end
