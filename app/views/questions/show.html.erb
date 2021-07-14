@@ -1,7 +1,27 @@
 
-<p>質問投稿表示<%= @question.body %></p>
+<div>
+  <p>質問投稿表示</p>
+  <p>商品名→<%= @question.title %></p>
+   <% if buyer_signed_in? %>
+    <p><%= link_to "編集",edit_question_path(@question) %></p>
+    <p><%= link_to "削除", question_path(@question), method: :delete, data: {confirm: "本当に削除しますか？"} %></p>
+   <%end %>
+  <p>質問内容→<%= @question.body %></p>
+
+  <%#
+  ↑
+ questions_controllerの
+ def show
+ @question = Question.find(params[:id])
+ end
+これは通常
+質問の表示(フォームではない)
+  %>
+
+</div>
 
 <div>
+  <% if seller_signed_in? %>
   <%= form_with(model: [@question, @answer], local: true) do |f| %>
     <div>
       <%= f.label :body, "回答フォーム表示" %><br>
@@ -9,11 +29,71 @@
     </div>
     <%= f.submit "投稿する" %>
   <% end %>
+  <% end %>
+  <%#
+  ↑
+  回答フォームを表示(投稿フォーム)　answers_controllerのdef newをquestions_controllerのshowに持ってきている。
+
+  ここはquestions/show.html.erbだからquestions_controllerのdef showが働く
+ answers_controller   のdef new @answer = Answer.newに書くはずが
+ questions_contorllerのdef showに@answer = Answer.newと書かれている
+
+ questions_contorllerのdef showに  answerのnew(投稿フォーム)を記入するやり方
+ つまり
+ 別のコントローラのインスタンス変数をビューで参照のやり方になる
+
+ def show
+ @question = Question.find(params[:id])
+ ＋
+ @answer = Answer.new
+ end
+
+ 条件としてアソシエーションしていること↓
+  (buyer 1対多 )question 1対多 answer 多対1 seller
+  question.rb has_many :answers
+  answer.rb belongs_to :seller,belongs_to :question
+
+  %>
+
 </div>
 
-<p>回答投稿表示<%= @question.body %></p>
+<div>
+<p>回答投稿表示</p>
+</div>
+<p></p>
 <div>
   <% @question.answers.each do |answer| %>
-    <p><%= answer.body %></p>
+    <p>質問回答→<%= answer.body %></p>
+
+    <% if seller_signed_in? %><%#%バリデーションまだかけてない%>
+    <p><%= link_to "編集",edit_question_answer_path(@question,answer) %></p>
+    <p><%= link_to "削除", question_answer_path(@question,answer), method: :delete, data: {confirm: "本当に削除しますか？"} %></p>
+    <% end %>
+
   <% end %>
 </div>
+
+<%#
+↑
+回答投稿を表示(回答投稿)　おそらく= answers_controllerのdef index をquestions_controllerのshowに持ってきている。
+
+ここはquestions/show.html.erbだからquestions_controllerのdef showが働く
+answers_controller   のdef index @answer = Answer.allに書くはずが
+questions_contorllerのdef showには アソシエーションが訊いていればと書かない
+def new  の時は保存するので書かないといけないが
+def indexの時は保存されているから書かなくてよい。
+
+buyers_controller.rb
+buyers/show.html.erbの時も同じのがあった。
+
+
+じゃあどうやって下記を表示するのか？
+魚詳細(fishs/:id fishs#show)の画面に
+に
+質問フォーム(questions/new)
+と
+質問投稿表示(questions/:id questions/show)
+回答フォーム表示
+回答投稿表示
+
+%>

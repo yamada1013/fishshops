@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
 
   resources :questions do
-    resources :answers, only: [:create]
+    resources :answers#editとupdateとdestroy追加するから今は保留, only: [:create]
   end
   #get "/questions/new", to: "questions#new"
   #post "/questions", to: "questions#create"
