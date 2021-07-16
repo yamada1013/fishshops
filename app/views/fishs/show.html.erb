@@ -31,6 +31,17 @@
   </div>
   <p><%= link_to "質問する", new_question_path %></p>
 
+  <%= form_with(model: @question, local: true) do |f| %>
+   <div>
+     <p>質問フォーム表示</p>
+     <p>商品名<%= f.text_field :title %></p>
+     <p>質問記入<%= f.text_area :body %></p>
+   </div>
+   <%= f.submit "質問する" %>
+  <% end %>
+
+  <%#<p>質問内容→<%= @question.body %></p>
+
  <% elsif seller_signed_in?  %>
   <% if @fish.seller_id == current_seller.id %>
   <div class="col-md-6">

@@ -1,12 +1,10 @@
 <% if buyer_signed_in? %>
-
-<%= form_with(model: @question, local: true) do |f| %>
+ <%= form_with(model: @question, local: true) do |f| %>
   <div>
     <p>質問フォーム表示</p>
     <p>商品名<%= f.text_field :title %></p>
     <p>質問記入<%= f.text_area :body %></p>
   </div>
   <%= f.submit "質問する" %>
-<% end %>
-
+ <% end %>
 <% end %>
