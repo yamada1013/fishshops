@@ -14,8 +14,7 @@ PER_PAGE = 6
   def show
     @fish = Fish.find(params[:id])
     @question = Question.new
-
-    #@question = Question.find(params[:id])
+    @question = Question.find(params[:fish_id])
   end
 
   def new
@@ -58,5 +57,4 @@ PER_PAGE = 6
   def fish_params
     params.require(:fish).permit(:fishname, :body, :image)
   end
-
 end

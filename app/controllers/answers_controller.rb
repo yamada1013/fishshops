@@ -1,6 +1,11 @@
 class AnswersController < ApplicationController
   #before_action :authenticate_seller! 今はややこしくなるから省く
 
+  def show
+    @answer = Answer.find(params[:id])
+    @question = Question.find(params[:question_id])
+  end
+
   def create
     @answer = Answer.new(answer_params)
     @answer.seller_id = current_seller.id

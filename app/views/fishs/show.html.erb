@@ -40,20 +40,33 @@
    <%= f.submit "質問する" %>
   <% end %>
 
-  <%#<p>質問内容→<%= @question.body %></p>
+  <p>質問内容→<%= @question.body %></p>
+  <p>商品名→<%= @question.title %></p>
 
- <% elsif seller_signed_in?  %>
-  <% if @fish.seller_id == current_seller.id %>
-  <div class="col-md-6">
-   <%= link_to "編集", edit_fish_path(@fish) %>
-   <%= link_to "削除", fish_path(@fish) , method: :delete, data:{confirm:"削除いいですか?"} %>
+
+
+  <% elsif seller_signed_in?  %>
+   <% if @fish.seller_id == current_seller.id %>
+   <div class="col-md-6">
+    <%= link_to "編集", edit_fish_path(@fish) %>
+    <%= link_to "削除", fish_path(@fish) , method: :delete, data:{confirm:"削除いいですか?"} %>
+    </div>
+   <% end %>
+  <div class="col-md-12">
+   <h6>いいね数  <%= @fish.buyerfishs.count %></h6>
    </div>
-  <% end %>
- <div class="col-md-12">
-  <h6>いいね数  <%= @fish.buyerfishs.count %></h6>
-  </div>
 
+   <% @question.answers.each do |answer| %>
+    <p>質問回答→<%= answer.body %></p>
+    <p><%= link_to "編集",edit_question_answer_path(@question,answer) %></p>
+    <p><%= link_to "削除", question_answer_path(@question,answer), method: :delete, data: {confirm: "本当に削除しますか？"} %></p>
   <% end %>
+  <p>質問内容→<%= @question.body %></p>
+  <p>商品名→<%= @question.title %></p>
+
+
+   <% end %>
+
 
   </div>
   </div>
