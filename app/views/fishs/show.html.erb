@@ -31,6 +31,7 @@
   </div>
   <p><%= link_to "質問する", new_question_path %></p>
 
+<p>こっちが@questionだけをを使った質問フォーム questions/new</p>
   <%= form_with(model: @question, local: true) do |f| %>
    <div>
      <p>質問フォーム表示</p>
@@ -69,7 +70,25 @@
 
 
 
-     <p><%= link_to "質問テスト",new_fish_question_path(@fish,@question) %></p>
+<p><%= link_to "質問テスト",new_fish_question_path(@fish,@question) %></p>
+
+<p>こっちが@fishと@questionを使った質問フォーム fishs/:fish_id/questions/new </p>
+     <%= form_with(model: [@fish,@question], local: true) do |f| %>
+    <div>
+      <%= f.label :body, "質問フォーム表示" %><br>
+      <p>商品名<%= f.text_field :title %></p>
+      <p>内容<%= f.text_area :body %></p>
+    </div>
+    <%= f.submit "質問する" %>
+<% end %>
+
+<% @fish.questions.each do |question| %>
+  <p>あ  <%= question.title %></p>
+  <p>い  <%= question.body %></p>
+  <p><%= link_to "編集1",edit_fish_question_path(@fish,question) %></p>
+  <p><%= link_to "削除", fish_question_path(@fish,question), method: :delete, data: {confirm: "本当に削除しますか？"} %></p>
+<% end %>
+
 
 
 

@@ -8,6 +8,10 @@
    <%end %>
   <p>質問内容→<%= @question.body %></p>
 
+  <p>質問投稿表示</p>
+  <p>商品名→<%= @question.title %></p>
+  <p>質問内容→<%= @question.body %></p>
+
   <%#
   ↑
  questions_controllerの
@@ -80,14 +84,13 @@
 
 <% @fish.questions.each do |question| %>
 
-  <p><%= question.title %></p>
-  <p><%= question.body %></p>
-
+<p>あ<%= question.title %></p>
+<p>い<%= question.body %></p>
 
 <% end %>
 
-<p><%= @question.title %></p>
-<p><%= @question.body %></p>
+<p>う<%= @question.title %></p>
+<p>え<%= @question.body %></p>
 
 
 <%#
