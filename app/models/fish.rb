@@ -4,6 +4,7 @@ class Fish < ApplicationRecord
   has_many :buyerfishs, dependent: :destroy
 
  #has_many :questions
+  has_many :questions , dependent: :destroy
 
   with_options presence: true do
     validates :fishname

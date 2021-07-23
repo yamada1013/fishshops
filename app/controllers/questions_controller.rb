@@ -6,19 +6,22 @@ class QuestionsController < ApplicationController
 end
 
   def new
+    @fish = Fish.find(params[:fish_id])
     @question = Question.new
+    #@fish = Fish.find(params[:id])
   end
 
   def create
+    @fish = Fish.find(params[:fish_id])
     @question = Question.new(question_params)
     @question.buyer_id = current_buyer.id
-    if @question.save
-       flash[:notice] = "成功！"
-       redirect_to("/questions/new")
-    else
-       flash.now[:alert] = "失敗！"
-       render("questions/new")
-    end
+    @question.fish_id = params[:fish_id]
+     @question.save
+      flash[:notice] = "成功！"
+      #redirect_to("/fishs/5/questions/22")
+      redirect_to fish_question_path(@fish,@question)
+      #redirect_to("/fishs/#{params[:fish_id]}/questions/#{params[:id]}")
+      #redirect_to("/fishs/#{params[:fish_id]}")
   end
 
   def update
@@ -34,7 +37,7 @@ end
 
    def show
      @question = Question.find(params[:id])
-     @answer = Answer.new
+     @fish = Fish.find(params[:fish_id])
    end
 
    def edit
