@@ -5,4 +5,5 @@ class Question < ApplicationRecord
   #belongs_to :fish
   #belongs_to :buyer
   belongs_to :fish
+  
 end
