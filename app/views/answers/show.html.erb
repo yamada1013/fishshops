@@ -2,4 +2,18 @@
 
 
 
-<p>質問回答→<%= @answer.body %></p>
+<p>1質問回答です。→<%= @answer.body %></p>
+<p><%= link_to "編集テスト",edit_fish_question_answer_path(@fish,@question,@answer) %></p>
+<p><%= link_to "削除", fish_question_answer_path(@fish,@question,@answer), method: :delete, data: {confirm: "本当に削除しますか？"} %></p>
+
+
+<% @fish.answers.each do |a| %>
+ <p>質問回答2<%= a.body %></p>
+<% end %>
+
+
+<% @fish.questions.each do |a| %>
+ <% a.answers.each do |b| %>
+ <p>質問回答3<%= b.body %></p>
+ <% end %>
+<% end %>

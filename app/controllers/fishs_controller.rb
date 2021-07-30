@@ -14,6 +14,10 @@ PER_PAGE = 6
   def show
     @fish = Fish.find(params[:id])
     @question = Question.new
+
+    #@fish = Fish.find(params[:id]) #←params[:fish_id]ではない
+    #@question = Question.find(params[:id])
+    #@answer = Answer.new
   end
 
   def new
