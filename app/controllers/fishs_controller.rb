@@ -12,13 +12,18 @@ PER_PAGE = 6
   end
 
   def show
+
     @fish = Fish.find(params[:id])
     @question = Question.new
 
     #@fish = Fish.find(params[:id]) #←params[:fish_id]ではない
+
     #@question = Question.find(params[:id])
+
     #@answer = Answer.new
-  end
+    #buyerログインしてsellerの回答を見る
+
+    end
 
   def new
     @fish = Fish.new

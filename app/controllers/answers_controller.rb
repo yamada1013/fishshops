@@ -28,7 +28,8 @@ class AnswersController < ApplicationController
       @answer.save
       flash[:notice] = "成功！"
       #redirect_to("/questions/#{params[:question_id]}")
-      redirect_to fish_question_answer_path(@fish,@question,@answer)
+      redirect_to fish_question_path(@fish,@question)
+      #redirect_to fish_question_answer_path(@fish,@question,@answer)
     #else
       #@question = Question.find(params[:question_id])
       #flash.now[:alert] = "失敗！"
@@ -37,9 +38,11 @@ class AnswersController < ApplicationController
   end
 
   def edit
-  @fish = Fish.find(params[:fish_id])
-  @question = Question.find(params[:question_id])
-  @answer = Answer.find(params[:id])
+    @question = Question.find(params[:question_id])
+    @fish = Fish.find(params[:fish_id])
+    @answer = Answer.find(params[:id])
+
+
   #@question = Question.find(params[:id])
   #@question = Question.find(params[:question_id])
   #@answer = Answer.find(params[:id])
@@ -57,7 +60,8 @@ class AnswersController < ApplicationController
     #@answer.question_id = params[:question_id]
      @answer.update(answer_params)
       flash[:notice] = "成功！"
-      redirect_to fish_question_answer_path(@fish,@question,@answer)
+      redirect_to fish_question_path(@fish,@question)
+      #redirect_to fish_question_answer_path(@fish,@question,@answer)
 
   end
 
@@ -68,7 +72,8 @@ class AnswersController < ApplicationController
 
    @answer.destroy
    flash[:notice] = "成功！"
-   redirect_to("/fishs/#{params[:fish_id]}")
+   redirect_to fish_question_path(@fish,@question)
+   #redirect_to("/fishs/#{params[:fish_id]}")
    #redirect_to fish_question_answer_path(@fish,@question,@answer)
   end
 

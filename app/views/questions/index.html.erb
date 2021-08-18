@@ -1,8 +1,9 @@
 <% @questions.each do |q| %>
 
  <div>
-  <%= link_to question_path(q) do %>
-   <p><%= q.title %></p>
+  <%= link_to fish_question_path(@fish,q) do %>
+   <p>バイヤーが質問した商品名→<%= q.title %></p>
+
   <% end %>
 
    <% if buyer_signed_in? %>
@@ -11,4 +12,4 @@
    <% end %>
   </div>
 
-<% end %>
+ <% end %>
