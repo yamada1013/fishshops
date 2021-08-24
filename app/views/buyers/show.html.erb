@@ -28,6 +28,19 @@
  <% end %>
  </div>
 
+<div></div>
+<br>
+ <% @buyer.orders.each do |order| %>
+  <div>
+    <p>購入した商品名→<%= order.ordername %></p>
+    <p>注文番号           →<%= order.id %></p>
+    <p>セラーid            →<%= order.seller_id %></p>
+    <p>バイヤーid        →<%= order.buyer_id %></p>
+   <p>発送先                →<%= order.address %></p>
+   <%= link_to "削除", order_path(order) , method: :delete, data:{confirm:"削除いいですか?"} %>
+  </div>
+ <% end %>
+
 <% end %>
 
 </div>

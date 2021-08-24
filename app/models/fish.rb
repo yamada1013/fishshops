@@ -3,6 +3,8 @@ class Fish < ApplicationRecord
   belongs_to :seller
   has_many :buyerfishs, dependent: :destroy
 
+  has_many :orders
+
  #has_many :questions
   has_many :questions , dependent: :destroy
   has_many :answers , dependent: :destroy

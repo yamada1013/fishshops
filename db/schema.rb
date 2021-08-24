@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_29_070453) do
+ActiveRecord::Schema.define(version: 2021_08_18_101048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2021_07_29_070453) do
     t.text "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "order_id"
     t.index ["email"], name: "index_buyers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_buyers_on_reset_password_token", unique: true
   end
@@ -61,6 +62,18 @@ ActiveRecord::Schema.define(version: 2021_07_29_070453) do
     t.string "image_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "address"
+    t.integer "price"
+    t.integer "fish_id"
+    t.integer "buyer_id"
+    t.integer "seller_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "ordername"
   end
 
   create_table "questions", force: :cascade do |t|

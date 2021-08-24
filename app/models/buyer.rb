@@ -4,7 +4,7 @@ class Buyer < ApplicationRecord
   has_many :buyerfishs, dependent:  :destroy
   has_many  :questions, dependent: :destroy
 
-
+  has_many :orders
 
   def already_buyerfished?(fish)
     self.buyerfishs.exists?(fish_id: fish.id)

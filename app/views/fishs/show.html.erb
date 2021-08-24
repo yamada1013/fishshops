@@ -66,8 +66,9 @@
   <%#<p>質問内容→<%= @question.body %></p>
   <%#<p>商品名→<%= @question.title %></p>
 
-
    <% end %>
+
+   <%= link_to "購入する", orders_new_path(fish_id: @fish.id) %>
 
 <%#<p><%= link_to "質問テスト",new_fish_question_path(@fish,@question) %></p>
 

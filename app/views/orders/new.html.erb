@@ -1,0 +1,28 @@
+<h1>Orders#new</h1>
+<p>Find me in app/views/orders/new.html.erb</p>
+
+<%= form_with(model: @order, local: true, url: orders_confirm_path ) do |form| %>
+
+ <div class="field">
+   <%= form.label :購入する商品名 %>
+   <%= form.text_field :ordername %>
+ </div>
+
+ <div class="field">
+   <%= form.label :発送先住所 %>
+   <%= form.text_field :address %>
+ </div>
+
+ <%= form.hidden_field :fish_id, value: @fish.id %>
+ <%= form.hidden_field :buyer_id, value: current_buyer.id %>
+ <%#<%= form.hidden_field :seller_id, value: current_seller.id %>
+
+
+
+ <br />
+
+ <div class="field">
+   <%= form.submit "注文を確認する" %>
+ </div>
+
+<% end %>

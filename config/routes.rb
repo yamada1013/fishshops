@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
 
 
+  get 'orders/new'
+  get 'orders/create'
+  get 'orders/confirm'
   devise_for :buyers
   devise_for :sellers
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
@@ -15,6 +18,12 @@ Rails.application.routes.draw do
     end
   end
   resources :buyers
+
+  resources :orders, only:[:new, :create,:index,:destroy] do
+    collection do
+      post :confirm
+    end
+  end
 
 
   resources :questions do
