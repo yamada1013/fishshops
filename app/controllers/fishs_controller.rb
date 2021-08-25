@@ -1,7 +1,7 @@
 class FishsController < ApplicationController
   before_action :authenticate_seller!, except: [:index, :show ]
 
-PER_PAGE = 6
+PER_PAGE = 4
 
   def index
    #@q = Fish.ransack(params[:q]) #検索機能のみの場合
