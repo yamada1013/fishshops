@@ -145,7 +145,12 @@
               <% end %>
             </li>
             <li class="nav-item active">
-              <%= link_to sellers_guest_sign_in_path, method: :post do %>
+              <%= link_to buyers_guest_sign_in_path, method: :post, class: "nav-link" do %>
+                バイヤーゲストログイン閲覧用
+              <% end %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to sellers_guest_sign_in_path, method: :post, class: "nav-link" do %>
                 セラーゲストログイン閲覧用
               <% end %>
             </li>

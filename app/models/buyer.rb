@@ -6,6 +6,13 @@ class Buyer < ApplicationRecord
 
   has_many :orders
 
+  def self.guest
+       find_or_create_by!(email: 'guest@example.com') do |buyer|
+         buyer.buyername = "バイヤー用ゲスト"
+         buyer.password = SecureRandom.urlsafe_base64
+       end
+     end
+
   def already_buyerfished?(fish)
     self.buyerfishs.exists?(fish_id: fish.id)
   end

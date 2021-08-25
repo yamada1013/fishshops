@@ -6,12 +6,17 @@ Rails.application.routes.draw do
   get 'orders/create'
   get 'orders/confirm'
   devise_for :buyers
+
+  devise_scope :buyer do
+    post 'buyers/guest_sign_in', to: 'buyers/sessions#guest_sign_in'
+  end
+
   devise_for :sellers
 
   devise_scope :seller do
     post 'sellers/guest_sign_in', to: 'sellers/sessions#guest_sign_in'
   end
-  
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "home#index"
   resources :sellers
