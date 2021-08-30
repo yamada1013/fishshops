@@ -1,0 +1,9 @@
+<h1>Buyers#index</h1>
+<p>Find me in app/views/buyers/index.html.erb</p>
+
+<% @buyers.each do |buyer| %>
+
+    <%= buyer.buyername %>
+    <%= buyer.email %>
+    <%= buyer.address %>
+<% end %>

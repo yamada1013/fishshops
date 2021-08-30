@@ -1,0 +1,8 @@
+<%= form_with(model: [@fish,@question], local: true) do |f| %>
+    <div>
+      <%= f.label :body, "質問フォーム表示" %><br>
+      <p>商品名<%= f.text_field :title %></p>
+      <p>内容<%= f.text_area :body %></p>
+    </div>
+    <%= f.submit "質問する" %>
+<% end %>

@@ -1,0 +1,65 @@
+<p>バイヤーの質問タイトル→<%= @question.title %></p>
+<p>バイヤーの質問内容 →<%= @question.body %></p>
+
+<p><%= link_to "編集",edit_fish_question_path(@fish,@question) %></p>
+<p><%= link_to "削除", fish_question_path(@fish,@question), method: :delete, data: {confirm: "本当に削除しますか？"} %></p>
+
+<%#<p><%= link_to "seller回答する",new_fish_question_answer_path(@fish,@question,@answer) %></p>
+<%#fish/question/show(ここ)で回答フォームを入れれたから↑消す%>
+
+<%#バイヤーでログインした時は↓の回答フォームを隠す ⭐️バリデーションも後日入れる%>
+<% if seller_signed_in? %>
+ <%= form_with(model: [@fish,@question,@answer], local: true) do |f| %>
+     <div>
+       <%= f.label :body, "回答フォーム表示" %><br>
+       <p>内容<%= f.text_area :body %></p>
+     </div>
+     <%= f.submit "回答する" %>
+ <% end %>
+<% end %>
+
+<% @question.answers.each do |a| %>
+  <p>セラーの質問回答→<%= a.body %></p>
+<% if seller_signed_in? %>
+  <p><%= link_to "編集",edit_fish_question_answer_path(@fish,@question,a) %></p>
+  <p><%= link_to "削除", fish_question_answer_path(@fish,@question,a), method: :delete, data: {confirm: "本当に削除しますか？"} %></p>
+  <p><%= link_to "回答ページへ戻る", fish_question_path(@question,a) %></p>
+<% end %>
+<% end %>
+
+
+
+<%#<% @fish.questions.each do |question| %>
+
+<%#<p>う<%= question.title %></p>
+<%#<p>え<%= question.body %></p>
+<%#<p><%= link_to "編集テスト",edit_fish_question_path(@fish,question) %></p>
+<%#<p><%= link_to "削除", fish_question_path(@fish,question), method: :delete, data: {confirm: "本当に削除しますか？"} %></p>
+
+<%#<% end %>
+
+
+<%#
+↑
+回答投稿を表示(回答投稿)　おそらく= answers_controllerのdef index をquestions_controllerのshowに持ってきている。
+
+ここはquestions/show.html.erbだからquestions_controllerのdef showが働く
+answers_controller   のdef index @answer = Answer.allに書くはずが
+questions_contorllerのdef showには アソシエーションが訊いていればと書かない
+def new  の時は保存するので書かないといけないが
+def indexの時は保存されているから書かなくてよい。
+
+buyers_controller.rb
+buyers/show.html.erbの時も同じのがあった。
+
+
+じゃあどうやって下記を表示するのか？
+魚詳細(fishs/:id fishs#show)の画面に
+に
+質問フォーム(questions/new)
+と
+質問投稿表示(questions/:id questions/show)
+回答フォーム表示
+回答投稿表示
+
+%>

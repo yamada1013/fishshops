@@ -1,13 +1,114 @@
-<h1>Fishs#show</h1>
-<p>Find me in app/views/fishs/show.html.erb</p>
+<div class="container mt-1">
+<div class="row">
+
+<div class="col-md-12">
+  <%= attachment_image_tag @fish, :image %>
+  <h6>商品名　　<%= @fish.fishname%></h6>
+</div>
+<div class="col-md-12">
+  <h6>商品詳細　<%= @fish.body %></h6>
+</div>
+<div class="col-md-6">
+  <h6>作成日  <%= @fish.created_at.to_s(:datetime_jp) %></h6>
+  <h6>更新日<%= @fish.updated_at.to_s(:datetime_jp) %></h6>
+</div>
 
 
- <%= @fish.fishname%>
- <%= attachment_image_tag @fish, :image %>
- <%= @fish.body %>
- <h1>作成日<%= @fish.created_at.to_s(:datetime_jp) %></h1>
- <h1>更新日<%= @fish.updated_at.to_s(:datetime_jp) %></h1>
- <% if @fish.seller_id == current_seller.id %>
-  <%= link_to "編集", edit_fish_path(@fish) %>
-  <%= link_to "削除", fish_path(@fish) , method: :delete, data:{confirm:"削除いいですか?"} %>
+ <% if buyer_signed_in? %>
+
+ <div class="col-md-12">
+  <% if current_buyer.already_buyerfished?(@fish) %>
+   <%= link_to  fish_buyerfishs_path(@fish) , method:  :delete do %>
+    <i class="fas fa-heart"></i>
+   <% end %>
+ <h6>いいね数  <%= @fish.buyerfishs.count %></h6>
+  <% else %>
+   <%= link_to fish_buyerfishs_path(@fish) , method: :post do %>
+    <i class="far fa-heart"></i>
+   <% end %>
+   <h6>いいね数  <%= @fish.buyerfishs.count %></h6>
+  <% end %>
+  </div>
+  <%#<p><%= link_to "質問する", new_question_path %></p>
+
+<%#<p>こっちが@questionだけをを使った質問フォーム questions/new</p>
+  <%#<%= form_with(model: @question, local: true) do |f| %>
+   <%#<div>
+     <p>質問フォーム表示</p>
+     <p>商品名<%= f.text_field :title %></p>
+  <%#   <p>質問記入<%= f.text_area :body %></p>
+  <%# </div>
+   <%#<%= f.submit "質問する" %>
+<%#  <% end %>
+
+  <%#<p>質問内容→<%= @question.body %></p>
+  <%#<p>商品名→<%= @question.title %></p>
+
+
+
+  <% elsif seller_signed_in?  %>
+   <% if @fish.seller_id == current_seller.id %>
+   <div class="col-md-6">
+    <%= link_to "編集", edit_fish_path(@fish) %>
+    <%= link_to "削除", fish_path(@fish) , method: :delete, data:{confirm:"削除いいですか?"} %>
+    </div>
+   <% end %>
+  <div class="col-md-12">
+   <h6>いいね数  <%= @fish.buyerfishs.count %></h6>
+   </div>
+
+ <%# これは↓なんだ？削除していい? 61〜67 %>
+   <% @question.answers.each do |answer| %>
+    <p>質問回答→<%= answer.body %></p>
+    <p><%= link_to "編集",edit_question_answer_path(@question,answer) %></p>
+    <p><%= link_to "削除", question_answer_path(@question,answer), method: :delete, data: {confirm: "本当に削除しますか？"} %></p>
+  <% end %>
+  <%#<p>質問内容→<%= @question.body %></p>
+  <%#<p>商品名→<%= @question.title %></p>
+
+   <% end %>
+
+   <%= link_to "購入する", orders_new_path(fish_id: @fish.id) %>
+
+<%#<p><%= link_to "質問テスト",new_fish_question_path(@fish,@question) %></p>
+
+<%#<p>こっちが@fishと@questionを使った質問フォーム fishs/:fish_id/questions/new </p>%>
+<% if buyer_signed_in? %>
+     <%= form_with(model: [@fish,@question], local: true) do |f| %>
+    <div>
+      <%= f.label :body, "質問フォーム表示" %><br>
+      <p>商品名<%= f.text_field :title %></p>
+      <p>内容<%= f.text_area :body %></p>
+    </div>
+    <%= f.submit "質問する" %>
+    <% end %>
+  <% end %>
+
+<% @fish.questions.each do |question| %>
+  <p>商品名→<%= question.title %></p>
+  <p>バイヤーの質問内容 →<%= question.body %></p>
+
+ <% if buyer_signed_in? %>
+ <%# バイヤーのログイン時にだけ編集できるようにバリデーションをかける%>
+ <p><%= link_to "編集",edit_fish_question_path(@fish,question) %></p>
+ <p><%= link_to "削除", fish_question_path(@fish,question), method: :delete, data: {confirm: "本当に削除しますか？"} %></p>
+
+  <%= link_to  "セラーの回答を見るquestions/show" ,fish_question_path(@fish,question) %>
+  <%= link_to  "バイヤーがした質問一覧questions/index" ,fish_questions_path(@fish,question) %>
+ <% elsif seller_signed_in?  %>
+  <%= link_to  "セラーが質問回答するquestions/show" ,fish_question_path(@fish,question) %>
+  <%= link_to  "セラーがされた質問一覧questions/index" ,fish_questions_path(@fish,question) %>
+ <% end %>
 <% end %>
+
+
+
+
+
+<%#<p><%= link_to "回答テスト",new_fish_question_answer_path(@fish,@question,@answer) %></p>
+
+
+
+
+  </div>
+  </div>

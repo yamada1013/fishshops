@@ -1,0 +1,47 @@
+<div class="container mt-1">
+<div class="row">
+
+<% if @buyer.id  == current_buyer.id %>
+<div class="col-md-6">
+  <h6>名前　<%= @buyer.buyername %>さん</h6>
+</div>
+<div class="col-md-6">
+  <h6><%= @buyer.email %></h6>
+</div>
+<div class="col-md-12">
+  <h6><%= link_to "バイヤーアカウント編集" , edit_buyer_path(@buyer) %></h6>
+</div>
+
+
+<div class="col-md-6">
+ <h6><%= @buyer.buyername %>さんが いいねした商品一覧</h6>
+</div>
+<div class="col-md-6">
+ <h6><%= @buyer.buyername %>さんが 購入した商品一覧</h6>
+</div>
+
+<div class="col-md-12">
+ <% @buyer.questions.each do |question| %>
+  <div>
+   <%= question.body %>
+  </div>
+ <% end %>
+ </div>
+
+<div></div>
+<br>
+ <% @buyer.orders.each do |order| %>
+  <div>
+    <p>購入した商品名→<%= order.ordername %></p>
+    <p>注文番号           →<%= order.id %></p>
+    <p>セラーid            →<%= order.seller_id %></p>
+    <p>バイヤーid        →<%= order.buyer_id %></p>
+   <p>発送先                →<%= order.address %></p>
+   <%= link_to "削除", order_path(order) , method: :delete, data:{confirm:"削除いいですか?"} %>
+  </div>
+ <% end %>
+
+<% end %>
+
+</div>
+</div>

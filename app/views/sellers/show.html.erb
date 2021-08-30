@@ -1,28 +1,60 @@
-<h1>Sellers#show</h1>
-<p>Find me in app/views/sellers/show.html.erb</p>
+<div class="container mt-1">
+<div class="row">
+  <div class="col-md-4">
+   <%= attachment_image_tag @seller, :profile_image , fallback: "no-image.png", class:'img-fluid' %>
+  </div>
+  <div class="col-md-4">
+    <%= @seller.sellername %>さん
+  </div>
+  <div class="col-md-4">
+    <%= @seller.profile %>
+  </div>
 
-<h1>ここは詳細</h1>
 
-
-    <h1><%= @seller.sellername %>さん</h1>
-    <%= attachment_image_tag @seller, :profile_image , fallback: "no-image.png" %>
-    <h1><%= @seller.profile %></h1>
     <% if @seller.id  == current_seller.id %>
-      <%= @seller.email %>
-      <%= link_to "アカウント編集" , edit_seller_path(@seller) %>
+     <div class="col-md-12">
+      <h6>E-mail <%= @seller.email %></h6>
+      </div>
+      <div class="col-md-12">
+      <h6><%= link_to "アカウント編集" , edit_seller_path(@seller) %></h6>
+     </div>
+
     <% end %>
 
+
+   <div class="col-md-6 mt-1">
     <% @seller.fishs.each do |fish| %>
+     <div class="card">
      <%= link_to fish_path(fish)  do %>
-      <%= attachment_image_tag fish, :image %>
-      <%= fish.fishname %>
-      <h1>作成日<%= fish.created_at.to_s(:datetime_jp) %></h1>
-      <h1>更新日<%= fish.updated_at.to_s(:datetime_jp) %></h1>
+      <%= attachment_image_tag fish, :image,class:'img-fluid' %>
+      <%= fish.fishname %><br>
+      </div>
+     <% end %>
+     <div class="card">
+      作成日<%= fish.created_at.to_s(:datetime_jp) %><br>
+      更新日<%= fish.updated_at.to_s(:datetime_jp) %><br>
+      </div>
         <% if fish.seller_id == current_seller.id %>
           <%= link_to "魚編集", edit_fish_path(fish) %>
           <%= link_to "削除", fish_path(fish) , method: :delete, data:{confirm:"削除いいですか?"} %>
         <% end %>
-     <% end %>
-
-
+      </div>
     <% end %>
+    </div>
+
+</div>
+</div>
+
+<div></div>
+<br>
+<%#has_manyとbelongs_toを書き込んだらバイヤーで保存されない%>
+ <% @seller.orders.each do |order| %>
+  <div>
+    <p>購入した商品名→<%= order.ordername %></p>
+    <p>注文番号           →<%= order.id %></p>
+    <p>セラーid            →<%= order.seller_id %></p>
+    <p>バイヤーid        →<%= order.buyer_id %></p>
+   <p>発送先                →<%= order.address %></p>
+   <%= link_to "削除", order_path(order) , method: :delete, data:{confirm:"削除いいですか?"} %>
+  </div>
+ <% end %>

@@ -1,16 +1,70 @@
+<div class="container mt-1">
+  <%= search_form_for @q ,url: fishs_path do |f| %>
+  <div class="row">
+    <div class="col-2">
+      <div class="form-group">
+        <%= f.label :fishname, "魚名" %>
+        <%= f.search_field :fishname_cont, autofocus: true, autocomplete: "fishname",class: 'form-control',maxlength: '100'  %>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <%= f.label :body, "詳細" %>
+        <%= f.search_field :body_cont, autofocus: true, autocomplete: "body",class: 'form-control',maxlength: '100'  %>
+      </div>
+    </div>
+    <div class="col-2 align-self-end">
+      <div class="form-group">
+        <%= f.submit "検索する", class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+<% end %>
 
-<% @fishs.each do |fish|%>
+<div class="row mt-2">
 
-  <%= link_to fish_path(fish) do %>
-    <%= attachment_image_tag fish, :image, fallback: "no-image.png" %>
-  <% end%>
+    <% @fishs.each do |fish|%>
+      <div class="col-md-2">
+        <%= link_to fish_path(fish)  do %> <%#class:'img-fluid'で画像を被らないように↓%>
+         <%= attachment_image_tag fish, :image, fallback: "no-image.png" , class:'img-fluid'%>
+        <% end%>
+     </div>
+      <div class="col-md-1">
+       <%= link_to fish_path(fish) do %>
+        <%= fish.fishname %>
+       <% end%>
+      </div>
+      <div class="col-md-1">
+       <%= link_to seller_path(fish.seller.id) do %>
+       販売者<%= fish.seller.sellername %>さん
+       <% end%>
+      </div>
 
-  <%= link_to fish_path(fish) do %>
-    <%= fish.fishname %>
- <% end%>
+      <%#<% if fish.seller_id != current_seller %>
 
- <%= link_to seller_path(fish.seller.id) do %>
-   <h1>販売者<%= fish.seller.sellername %>さん</h1>
-<% end%>
+      <div class="col-md-2">
+<% if buyer_signed_in? %>
+   <% if current_buyer.already_buyerfished?(fish) %>
+     <%= link_to  fish_buyerfishs_path(fish) , method:  :delete do %>
+    <i class="fas fa-heart"></i>
+    <%= fish.buyerfishs.count %>
+   <% end %>
+ <% else %>
+   <%= link_to fish_buyerfishs_path(fish) , method: :post do %>
+    <i class="far fa-heart"></i>
+    <%= fish.buyerfishs.count %>
+   <% end %>
 
-<% end%>
+<%#<% else %>
+ <% end %>
+ <%#<% end %>
+<% end %>
+    </div>
+
+
+    <% end %>
+</div>
+<div class="row mt-4">
+<%= paginate @fishs %>
+</div>
+</div>

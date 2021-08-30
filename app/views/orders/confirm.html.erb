@@ -1,0 +1,25 @@
+<h1>Orders#confirm</h1>
+<p>Find me in app/views/orders/confirm.html.erb</p>
+
+<%#<%= form_with(model:[@fish,@order],url:orders_create_path, local: true,method: :post) do |form| %>%>
+<%= form_with(model: @order, local: true) do |form| %>
+ <ul>
+   <li>
+     <p><%= form.label :注文商品名 %></p>
+     <p><%= @order.ordername %></p>
+   </li>
+   <li>
+     <p><%= form.label :発送先住所 %></p>
+     <p><%= @order.address %></p>
+   </li>
+ </ul>
+
+ <%#<%= form.hidden_field :quantity, value: @order.quantity %>
+ <%= form.hidden_field :address, value: @order.address %>
+ <%= form.hidden_field :ordername, value: @order.ordername %>
+ <%= form.hidden_field :fish_id, value: @order.fish_id %>
+ <%= form.hidden_field :buyer_id, value: @order.buyer_id %>
+ <%= form.hidden_field :seller_id, value: @order.seller_id %>
+
+ <%= form.submit "購入を確定する"%>
+<% end %>

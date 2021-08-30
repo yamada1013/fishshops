@@ -1,13 +1,29 @@
 class FishsController < ApplicationController
-  before_action :authenticate_seller!, except: [:index]
+  before_action :authenticate_seller!, except: [:index, :show ]
+
+PER_PAGE = 4
 
   def index
-    @fishs = Fish.all
+   #@q = Fish.ransack(params[:q]) #検索機能のみの場合
+   #@fishs = @q.result(distinct: true)#検索機能のみの場合
+
+   @q = Fish.ransack(params[:q])
+   @fishs = @q.result.page(params[:page]).per(PER_PAGE)
   end
 
   def show
+
     @fish = Fish.find(params[:id])
-  end
+    @question = Question.new
+
+    #@fish = Fish.find(params[:id]) #←params[:fish_id]ではない
+
+    #@question = Question.find(params[:id])
+
+    #@answer = Answer.new
+    #buyerログインしてsellerの回答を見る
+
+    end
 
   def new
     @fish = Fish.new
@@ -49,5 +65,4 @@ class FishsController < ApplicationController
   def fish_params
     params.require(:fish).permit(:fishname, :body, :image)
   end
-
 end

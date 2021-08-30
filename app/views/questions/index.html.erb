@@ -1,0 +1,15 @@
+<% @questions.each do |q| %>
+
+ <div>
+  <%= link_to fish_question_path(@fish,q) do %>
+   <p>バイヤーが質問した商品名→<%= q.title %></p>
+
+  <% end %>
+
+   <% if buyer_signed_in? %>
+    <%= link_to "編集",edit_question_path(q) %>
+    <%= link_to "削除", question_path(q), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+   <% end %>
+  </div>
+
+ <% end %>
